@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Marionette Task App</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body>
+
+        <!-- Application -->
+        <div class="container">
+            <h1>Marionette Task App</h1>
+            <div id="form-region"></div>
+            <div id="table-region"></div>
+        </div>
+
+        <!-- Templates -->
+        <script type="text/template" id="form-view">
+            <form>
+                <div class="form-group">
+                    <label for="title">New task:</label>
+                    <input type="text" id="title" class="form-control" placeholder="What do you need to do?">
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </script>
+
+        <script type="text/template" id="tasks-empty-view">
+            <p>There is nothing left to do, good job!</p>
+        </script>
+
+        <script type="text/template" id="tasks-table-view">
+            <form id="table-form">
+                <table class="table">
+                    <thead>
+                        <th><input type="checkbox" class='select-all'></th>
+                        <th>Task</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Manage</th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button class="onIncomplete btn btn-default">Mark as Incomplete</button>
+                <button class="onComplete btn btn-success">Mark as Complete</button>
+                <button class="onDelete btn btn-danger">Delete Selected</button>
+            </form>
+        </script>
+
+        <script type="text/template" id="task-view">
+            <% if (isEditing) { %>
+                <td colspan="2">
+                    <input type="text" name="title" value="<%= title %>" class="form-control">
+                </td>
+                <td colspan="2">
+                    <select name="priority" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </td>
+                <td><button class="onSave btn btn-success">Save</button></td>
+            <% } else { %>
+                <td><input type="checkbox" class='select-one'></td>
+                <td><%= title %></td>
+                <td><%= priority %></td>
+                <td><%= statusName() %></td>
+                <td>
+                    <button class="onEdit btn btn-default">Edit</button>
+                    <button class="onDestroy btn btn-danger">Delete</button>
+                </td>
+            <% } %>
+        </script>
+
+        <!-- Dependencies -->
+        <script src="assets/js/vendor/jquery.min.js"></script>
+        <script src="assets/js/vendor/underscore-min.js"></script>
+        <script src="assets/js/vendor/backbone-min.js"></script>
+        <script src="assets/js/vendor/backbone.marionette.min.js"></script>
+
+        <!-- Application -->
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>
