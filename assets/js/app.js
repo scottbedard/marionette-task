@@ -2,15 +2,11 @@
 
 (function() {
 
-    var App = {
-        // Marionette Application
-        Marionette: new Backbone.Marionette.Application(),
-
-        // Collections, Models, and Views namespace
-        Collections: {},
-        Models: {},
-        Views: {},
-    }
+    // Application namespace
+    var App = new Backbone.Marionette.Application;
+    App.Models = {};
+    App.Collections = {};
+    App.Views = {};
 
     // Task model
     App.Models.Task = Backbone.Model.extend({
@@ -70,7 +66,7 @@
         },
         templateHelpers: function () {
             return {
-                index: App.Marionette.tasks.indexOf(this.model),
+                index: App.tasks.indexOf(this.model),
                 statusName: function() {
                     return this.isComplete
                         ? 'Complete'
@@ -148,16 +144,16 @@
     });
 
     // Register the form and list regions
-    App.Marionette.addRegions({
+    App.addRegions({
         form: '#form-region',
         table: '#table-region',
     });
 
     // Initialize the collection and views
-    App.Marionette.addInitializer(function() {
+    App.addInitializer(function() {
 
         // Seed some dummy data
-        App.Marionette.tasks = new App.Collections.Tasks([
+        App.tasks = new App.Collections.Tasks([
             { title: 'Wake up', priority: 1, isComplete: true },
             { title: 'Go to the store', priority: 2 },
             { title: 'Pick up the dry cleaning', priority: 3 },
@@ -166,11 +162,11 @@
         ]);
 
         // Display our regions
-        App.Marionette.form.show( new App.Views.Form({ collection: App.Marionette.tasks }));
-        App.Marionette.table.show( new App.Views.Tasks({ collection: App.Marionette.tasks }));
+        App.form.show( new App.Views.Form({ collection: App.tasks }));
+        App.table.show( new App.Views.Tasks({ collection: App.tasks }));
     });
 
     // Ready, set, go!
-    App.Marionette.start();
+    App.start();
 
 })();
