@@ -64,7 +64,6 @@
             'change input[type="checkbox"]': 'onToggleIsChecked',
         },
         modelEvents: {
-            'destroy': 'onRemove',
             'change:isEditing': 'onEditingChanged',
             'change:isChecked': 'onCheckedChanged',
             'change:isComplete': 'onStatusChanged',
@@ -100,7 +99,7 @@
         onDestroy: function() {
             this.model.destroy();
         },
-        onRemove: function() {
+        removeThis: function() {
             this.$el.remove();
         },
         onToggleIsChecked: function() {
