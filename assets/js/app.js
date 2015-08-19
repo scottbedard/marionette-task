@@ -64,9 +64,9 @@
             'change input[type="checkbox"]': 'onToggleIsChecked',
         },
         modelEvents: {
-            'change:isEditing': 'onEditingChanged',
+            'change:isEditing': 'render',
             'change:isChecked': 'onCheckedChanged',
-            'change:isComplete': 'onStatusChanged',
+            'change:isComplete': 'render',
         },
         templateHelpers: function () {
             return {
@@ -86,14 +86,7 @@
         onCheckedChanged: function() {
             this.$('input[type="checkbox"]').prop('checked', this.model.get('isChecked'));
         },
-        onEditingChanged: function() {
-            this.render();
-        },
-        onStatusChanged: function() {
-            this.render();
-        },
         onEdit: function() {
-            console.log ('hello');
             this.model.set('isEditing', !this.model.get('isEditing'));
         },
         onDestroy: function() {
