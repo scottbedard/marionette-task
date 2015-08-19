@@ -99,9 +99,6 @@
         onDestroy: function() {
             this.model.destroy();
         },
-        removeThis: function() {
-            this.$el.remove();
-        },
         onToggleIsChecked: function() {
             this.model.set('isChecked', this.$('input[type="checkbox"]').first().is(':checked'));
         },
