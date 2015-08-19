@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
 
     var App = {
@@ -137,17 +139,18 @@
             e.preventDefault();
         },
         onSelectAll: function() {
+            var self = this;
             this.collection.each(function(task) {
-                task.set('isChecked', this.$('.select-all').prop('checked'));
+                task.set('isChecked', self.$('.select-all').prop('checked'));
             });
         },
         updateSelected: function(action) {
             // Todo: find a better way to do this...
             // Currently itterating over the array backwards so deleted index don't
-            // change the position of other models that should also be deleted.
+            // change the position of other models that should also be deleted.v
             for (var i = this.collection.length - 1; i >= 0; --i) {
                 var task = this.collection.at(i);
-                if (task.get('isChecked')) {
+                if (typeof task !== 'undefined' && task.get('isChecked')) {
                     task.set('isChecked', false);
                     action(task);
                 }
